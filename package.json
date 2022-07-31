@@ -1,0 +1,30 @@
+{
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged --allow-empty"
+        }
+    },
+    "lint-staged": {
+        "**/*.php": "./vendor/bin/php-cs-fixer fix --config .php_cs --allow-risky=yes"
+    },
+    "dependencies": {
+        "yarn": "^1.22.18"
+    }
+}

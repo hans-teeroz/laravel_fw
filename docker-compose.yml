@@ -1,0 +1,77 @@
+version: '3'
+services:
+
+  web:
+    build:
+      context: "."
+      dockerfile: ./docker/Dockerfile
+    # image: wyveo/nginx-php-fpm:php74
+    hostname: laravel8-web
+    working_dir: /var/www/html
+    container_name: laravel8-web
+    labels:
+      SERVICE_NAME: laravel8-web
+      SERVICE_80_NAME: laravel8-web
+      SERVICE_443_NAME: laravel8-web
+    ports:
+     - '9090:80'
+    depends_on:
+      db:
+        condition: service_healthy
+      mail:
+        condition: service_started
+      redis:
+        condition: service_started
+    environment:
+      APP_ENV: local
+      PHP_IDE_CONFIG: serverName=laravel8-web.service.docker
+    volumes:
+      - ./:/var/www/html
+      # logging
+      - ./docker/nginx/log:/var/log/nginx
+      - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
+      # config app 
+      # - ./docker/config/app.conf:/etc/nginx/conf.d/app.conf #wyveo/nginx-php-fpm:php74
+      - ./docker/config/server.conf:/etc/nginx/server.conf 
+
+  db:
+    image: mysql:5.7.35
+    #image: mysql:8.0.25
+    hostname: laravel8-db
+    container_name: laravel8-db
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: laravel8
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    labels:
+      SERVICE_NAME: laravel8-db
+      SERVICE_3306_NAME: laravel8-db
+      SERVICE_33060_NAME: laravel8-db
+    ports:
+      - '3308:3306'
+    healthcheck:
+      test: "/usr/bin/mysql --user=user --password=secret --execute \"SHOW DATABASES;\""
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    #command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+
+  mail:
+    image: mailhog/mailhog
+    hostname: laravel8-mail
+    container_name: laravel8-mail
+    labels:
+        SERVICE_NAME: laravel8-mail
+    ports:
+      - '8025:8025'
+
+  redis:
+    image: redis:4.0.14-alpine3.11
+    hostname: laravel8-redis
+    container_name: laravel8-redis
+    labels:
+      SERVICE_NAME: laravel8-redis

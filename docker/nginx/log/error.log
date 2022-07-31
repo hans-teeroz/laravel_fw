@@ -1,0 +1,33 @@
+2022/07/28 10:15:05 [notice] 17#17: using the "epoll" event method
+2022/07/28 10:15:05 [notice] 17#17: nginx/1.21.6
+2022/07/28 10:15:05 [notice] 17#17: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2022/07/28 10:15:05 [notice] 17#17: OS: Linux 5.10.104-linuxkit
+2022/07/28 10:15:05 [notice] 17#17: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2022/07/28 10:15:05 [notice] 17#17: start worker processes
+2022/07/28 10:15:05 [notice] 17#17: start worker process 18
+2022/07/28 10:15:05 [notice] 17#17: start worker process 19
+2022/07/28 10:15:05 [notice] 17#17: start worker process 20
+2022/07/28 10:15:05 [notice] 17#17: start worker process 21
+2022/07/28 10:15:05 [notice] 17#17: start worker process 22
+2022/07/28 10:15:05 [notice] 17#17: start worker process 23
+2022/07/28 10:17:35 [crit] 247#247: *1 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.21.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:17:37 [crit] 247#247: *1 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.21.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:17:37 [crit] 247#247: *1 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.21.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:17:38 [crit] 247#247: *1 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.21.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:17:38 [crit] 247#247: *1 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.21.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:17:38 [crit] 247#247: *1 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.21.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:20:31 [crit] 247#247: *4 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.22.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:20:32 [crit] 247#247: *4 connect() to unix:/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.22.0.1, server: laravel8-web.local, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.4-fpm.sock:", host: "laravel8-web.local:9090"
+2022/07/28 10:22:37 [notice] 18#18: using the "epoll" event method
+2022/07/28 10:22:37 [notice] 18#18: nginx/1.21.6
+2022/07/28 10:22:37 [notice] 18#18: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2022/07/28 10:22:37 [notice] 18#18: OS: Linux 5.10.104-linuxkit
+2022/07/28 10:22:37 [notice] 18#18: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2022/07/28 10:22:37 [notice] 18#18: start worker processes
+2022/07/28 10:22:37 [notice] 18#18: start worker process 19
+2022/07/28 10:22:37 [notice] 18#18: start worker process 20
+2022/07/28 10:22:37 [notice] 18#18: start worker process 21
+2022/07/28 10:22:37 [notice] 18#18: start worker process 22
+2022/07/28 10:22:37 [notice] 18#18: start worker process 23
+2022/07/28 10:22:37 [notice] 18#18: start worker process 24
+2022/07/28 18:08:57 [emerg] 227#227: "server" directive is not allowed here in /etc/nginx/server.conf:1
