@@ -13,3 +13,12 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+composer.lock
+/storage/debugbar/
+.DS_Store
+# php_cs
+.php_cs.cache
+package-lock.json
+/tools
+# docker
+docker/m

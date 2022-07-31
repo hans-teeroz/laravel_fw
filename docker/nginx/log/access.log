@@ -20,3 +20,6 @@
 192.168.0.1 - - [28/Jul/2022:18:07:29 +0000] "GET / HTTP/1.1" 200 29117 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
 192.168.32.1 - - [28/Jul/2022:18:12:10 +0000] "GET / HTTP/1.1" 200 5189 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
 192.168.32.1 - - [28/Jul/2022:18:12:25 +0000] "GET / HTTP/1.1" 200 5189 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+172.19.0.1 - - [31/Jul/2022:14:33:13 +0000] "GET / HTTP/1.1" 200 5189 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+172.19.0.1 - - [31/Jul/2022:14:33:34 +0000] "GET /api HTTP/1.1" 404 2143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+172.19.0.1 - - [31/Jul/2022:14:33:42 +0000] "GET /api/app HTTP/1.1" 404 2143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
