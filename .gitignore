@@ -21,4 +21,4 @@ composer.lock
 package-lock.json
 /tools
 # docker
-/docker/
+/docker
