@@ -5,9 +5,8 @@ services:
     build:
       context: "."
       dockerfile: ./docker/Dockerfile
-    # image: wyveo/nginx-php-fpm:php74
+    image: laravel8-web
     hostname: laravel8-web
-    working_dir: /var/www/html
     container_name: laravel8-web
     labels:
       SERVICE_NAME: laravel8-web
@@ -26,12 +25,11 @@ services:
       APP_ENV: local
       PHP_IDE_CONFIG: serverName=laravel8-web.service.docker
     volumes:
-      - ./:/var/www/html
+      - ./:/home/www/app
       # logging
       - ./docker/nginx/log:/var/log/nginx
       - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
       # config app 
-      # - ./docker/config/app.conf:/etc/nginx/conf.d/app.conf #wyveo/nginx-php-fpm:php74
       - ./docker/config/server.conf:/etc/nginx/server.conf 
 
   db:

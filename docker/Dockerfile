@@ -1,6 +1,6 @@
 FROM robinpmt/php7-fpm
 
-VOLUME /var/www/html
+VOLUME /home/www/app
 EXPOSE 80 443
 
 # ADD docker/local /
