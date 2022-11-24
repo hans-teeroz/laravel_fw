@@ -20,3 +20,4 @@ composer.lock
 .php_cs.cache
 package-lock.json
 /tools
+/.phpintel
