@@ -29,9 +29,14 @@ services:
       # logging
       - ./docker/nginx/log:/var/log/nginx
       - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
-      # config app 
-      - ./docker/config/server.conf:/etc/nginx/server.conf 
-
+      # config app
+      - ./docker/config/server.conf:/etc/nginx/server.conf
+      # config alias
+      - ./docker/home/www/.aliases:/home/www/.aliases
+      - ./docker/etc/cont-init.d:/etc/cont-init.d
+      - ./docker/etc/crontabs:/etc/crontabs
+      - ./docker/etc/services.d:/etc/services.d
+      - ./docker/tmp:/etc/tmp
   db:
     image: mysql:5.7.35
     #image: mysql:8.0.25
