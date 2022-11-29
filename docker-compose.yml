@@ -7,16 +7,16 @@ services:
       dockerfile: ./docker/Dockerfile
     image: laravel8-web1
     hostname: laravel8-web1
-    container_name: laravel8-web1
+    container_name: laravel8-web
     extra_hosts:
       # Need for Xdebug and some callback to local
       - "host.docker.internal:host-gateway"
     labels:
-      SERVICE_NAME: laravel8-web1
-      SERVICE_80_NAME: laravel8-web1
-      SERVICE_443_NAME: laravel8-web1
+      SERVICE_NAME: laravel8-web
+      SERVICE_80_NAME: laravel8-web
+      SERVICE_443_NAME: laravel8-web
     ports:
-     - '9090:80'
+      - '9090:80'
     depends_on:
       db:
         condition: service_healthy
@@ -38,17 +38,17 @@ services:
   db:
     image: mysql:5.7.35
     #image: mysql:8.0.25
-    hostname: laravel8-db1
-    container_name: laravel8-db1
+    hostname: laravel8-db
+    container_name: laravel8-db
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: laravel8
       MYSQL_USER: user
       MYSQL_PASSWORD: secret
     labels:
-      SERVICE_NAME: laravel8-db1
-      SERVICE_3306_NAME: laravel8-db1
-      SERVICE_3308_NAME: laravel8-db1
+      SERVICE_NAME: laravel8-db
+      SERVICE_3306_NAME: laravel8-db
+      SERVICE_3308_NAME: laravel8-db
     ports:
       - '3308:3306'
     healthcheck:
@@ -62,18 +62,18 @@ services:
 
   mail:
     image: mailhog/mailhog:v1.0.1
-    hostname: laravel8-mail1
-    container_name: laravel8-mail1
+    hostname: laravel8-mail
+    container_name: laravel8-mail
     labels:
-        SERVICE_NAME: laravel8-mail1
+      SERVICE_NAME: laravel8-mail
     ports:
       - '8009:8025'
 
   redis:
     image: redis:4.0.14-alpine3.11
     hostname: laravel8-redis1
-    container_name: laravel8-redis1
+    container_name: laravel8-redis
     labels:
-      SERVICE_NAME: laravel8-redis1
+      SERVICE_NAME: laravel8-redis
     volumes:
-    - ./docker/redis/data:/data
+      - ./docker/redis/data:/data
