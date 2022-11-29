@@ -1,6 +1,6 @@
 <p align="center" style="justify-content: center; display:flex; align-items: center;">
     <a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="350"></a> 
-    <font size="7" style="margin-right: 30px; padding-bottom: 20px">+</font>
+    <!-- <font size="7" style="margin-right: 30px; padding-bottom: 20px">+</font> -->
     <a href="https://www.docker.com/" target="_blank"><img src="https://avatars.githubusercontent.com/u/7739233?s=200&v=4" width="200" height="150"></a>
 </p>
 
