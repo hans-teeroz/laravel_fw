@@ -1,7 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-
-# Shutdown temporary nginx was ran from 11-run-placeholder-nginx
+# Shutdown temporary nginx
 MAX_WAIT=30
 STEP=0.5
 NGINX_PID=$(cat /var/run/nginx.pid)

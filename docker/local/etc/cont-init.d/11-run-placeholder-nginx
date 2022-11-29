@@ -4,4 +4,4 @@ chown nginx:nginx /tmp/nginx.conf
 chown nginx:nginx /tmp/placeholder.htm
 
 # Temporary run nginx and php-fpm
-/usr/sbin/nginx -c /tmp/nginx.conf &
+nginx -c /tmp/nginx.conf &

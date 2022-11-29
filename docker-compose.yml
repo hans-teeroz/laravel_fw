@@ -3,15 +3,18 @@ services:
 
   web:
     build:
-      context: "."
+      context: ""
       dockerfile: ./docker/Dockerfile
-    image: laravel8-web
-    hostname: laravel8-web
-    container_name: laravel8-web
+    image: laravel8-web1
+    hostname: laravel8-web1
+    container_name: laravel8-web1
+    extra_hosts:
+      # Need for Xdebug and some callback to local
+      - "host.docker.internal:host-gateway"
     labels:
-      SERVICE_NAME: laravel8-web
-      SERVICE_80_NAME: laravel8-web
-      SERVICE_443_NAME: laravel8-web
+      SERVICE_NAME: laravel8-web1
+      SERVICE_80_NAME: laravel8-web1
+      SERVICE_443_NAME: laravel8-web1
     ports:
      - '9090:80'
     depends_on:
@@ -29,28 +32,23 @@ services:
       # logging
       - ./docker/nginx/log:/var/log/nginx
       - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
-      # config app
-      - ./docker/config/server.conf:/etc/nginx/server.conf
-      # config alias
-      - ./docker/home/www/.aliases:/home/www/.aliases
-      - ./docker/etc/cont-init.d:/etc/cont-init.d
-      - ./docker/etc/crontabs:/etc/crontabs
-      - ./docker/etc/services.d:/etc/services.d
-      - ./docker/tmp:/etc/tmp
+      # Override xdebug.ini of image 
+      # - ./docker/customize/etc/php7/conf.d/xdebug.ini:/etc/php7/conf.d/xdebug.ini
+
   db:
     image: mysql:5.7.35
     #image: mysql:8.0.25
-    hostname: laravel8-db
-    container_name: laravel8-db
+    hostname: laravel8-db1
+    container_name: laravel8-db1
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: laravel8
       MYSQL_USER: user
       MYSQL_PASSWORD: secret
     labels:
-      SERVICE_NAME: laravel8-db
-      SERVICE_3306_NAME: laravel8-db
-      SERVICE_33060_NAME: laravel8-db
+      SERVICE_NAME: laravel8-db1
+      SERVICE_3306_NAME: laravel8-db1
+      SERVICE_3308_NAME: laravel8-db1
     ports:
       - '3308:3306'
     healthcheck:
@@ -58,23 +56,24 @@ services:
       interval: 3s
       timeout: 3s
       retries: 10
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
-    #command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --default-authentication-plugin=mysql_native_password
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
+    # volumes:
+    #   - ./docker/database/mysql:/var/lib/mysql
 
   mail:
-    image: mailhog/mailhog
-    hostname: laravel8-mail
-    container_name: laravel8-mail
+    image: mailhog/mailhog:v1.0.1
+    hostname: laravel8-mail1
+    container_name: laravel8-mail1
     labels:
-        SERVICE_NAME: laravel8-mail
+        SERVICE_NAME: laravel8-mail1
     ports:
-      - '8025:8025'
+      - '8009:8025'
 
   redis:
     image: redis:4.0.14-alpine3.11
-    hostname: laravel8-redis
-    container_name: laravel8-redis
+    hostname: laravel8-redis1
+    container_name: laravel8-redis1
     labels:
-      SERVICE_NAME: laravel8-redis
+      SERVICE_NAME: laravel8-redis1
+    volumes:
+    - ./docker/redis/data:/data
