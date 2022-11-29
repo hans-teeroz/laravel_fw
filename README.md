@@ -63,6 +63,10 @@
     ```bash
         make db
     ```
+- Go to Redis instance: 
+    ```bash
+        make redis
+    ```
 - Kill container: 
     ```bash
         make stop

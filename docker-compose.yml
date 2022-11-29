@@ -71,9 +71,11 @@ services:
 
   redis:
     image: redis:4.0.14-alpine3.11
-    hostname: laravel8-redis1
+    hostname: laravel8-redis
     container_name: laravel8-redis
     labels:
       SERVICE_NAME: laravel8-redis
+    ports:
+      - '6389:6379'
     volumes:
       - ./docker/redis/data:/data

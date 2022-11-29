@@ -20,7 +20,12 @@
         "illuminate/pagination": "^8.83",
         "laravel/socialite": "^5.5",
         "evenement/evenement": "^3.0",
-      "ext-json": "*"
+        "predis/predis": "^2.0",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.3",
+        "pusher/pusher-php-server": "^7.0",
+        "sentry/sentry-laravel": "^3.0",
+        "beyondcode/laravel-websockets": "^1.13",
+        "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -29,7 +34,8 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "barryvdh/laravel-debugbar": "^3.7"
     },
     "autoload": {
         "psr-4": {

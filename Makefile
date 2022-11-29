@@ -31,3 +31,6 @@ mysql:
 	
 db:
 	docker exec -it laravel8-db1 mysql -uuser -psecret
+	
+redis:
+	docker exec -it laravel8-redis redis-cli
