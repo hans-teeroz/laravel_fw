@@ -5,8 +5,8 @@ services:
     build:
       context: ""
       dockerfile: ./docker/Dockerfile
-    image: laravel8-web1
-    hostname: laravel8-web1
+    image: laravel8-web
+    hostname: laravel8-web
     container_name: laravel8-web
     extra_hosts:
       # Need for Xdebug and some callback to local
