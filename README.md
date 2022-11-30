@@ -42,7 +42,7 @@
 ### 4. Results:
 
 - Web Server http://localhost:9090
-- Mail Server http://localhost:8025
+- Mail Server http://localhost:8009
 - Mysql connection:  
     ```bash
         - Server Host: localhost
