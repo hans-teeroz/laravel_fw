@@ -70,7 +70,7 @@ services:
       - '8009:8025'
 
   redis:
-    image: redis:4.0.14-alpine3.11
+    image: redis:7.0.5
     hostname: laravel8-redis
     container_name: laravel8-redis
     labels:

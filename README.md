@@ -28,7 +28,7 @@
     ```bash
         - Web instance PHP 7.4.22
         - Database instance MySQL 5.7.35
-        - Caching instance Redis 4.0.14-alpine3.11
+        - Caching instance Redis 7.0.5
         - MailServer instance Mailhog 1.0.1
     ```
 
