@@ -2,6 +2,7 @@
 
 namespace App\Lib\SupportTrait;
 
+use App\Jobs\SyncDataJob;
 use App\Lib\Helper\Result;
 use App\Models\Base as BaseModel;
 use App\Services\ApiService;
@@ -387,6 +388,13 @@ trait ApiTrait
             $this->emit('created', [$model]);
             $this->emit('saved', [$model]);
 
+            if (env('REDIS_ENABLE', false)) {
+                if ($save) {
+                    $pathInfo = \request()->getPathInfo();
+                    SyncDataJob::dispatch($pathInfo);
+                }
+            }
+            
             DB::commit();
             return new Result([
                 'status' => $save,
@@ -417,6 +425,14 @@ trait ApiTrait
             $save = $model->save();
             $this->emit('updated', [$model]);
             $this->emit('saved', [$model]);
+
+            if (env('REDIS_ENABLE', false)) {
+                if ($save) {
+                    $pathInfo = str_replace("/$id", '', \request()->getPathInfo());
+                    SyncDataJob::dispatch($pathInfo);
+                }
+            }
+
             DB::commit();
             return new Result([
                 'status' => $save,
@@ -470,6 +486,13 @@ trait ApiTrait
             $save = $model->delete();
             $this->emit('deleted', [$model]);
 
+            if (env('REDIS_ENABLE', false)) {
+                if ($save) {
+                    $pathInfo = str_replace("/$id", '', \request()->getPathInfo());
+                    SyncDataJob::dispatch($pathInfo, get_class($model), $model->getEndcodeAllRelations());
+                }
+            }
+            
             DB::commit();
             return new Result([
                 'status' => $save,

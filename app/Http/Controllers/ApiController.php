@@ -3,25 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BaseRequest;
+use App\Lib\Cache\Caching;
 use App\Services\ApiService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 abstract class ApiController extends BaseController
 {
+    protected $redis;
+
+    public function __construct()
+    {
+        if (env('REDIS_ENABLE', false)) {
+            $this->redis = new Caching();
+        }
+    }
+
     /**
      * @return ApiService
      */
     abstract protected function getService();
 
+    public function getAuth()
+    {
+        if (strpos(\request()->route()->getPrefix(), 'app')) {
+            return c('user_auth');
+        }
+        return c('admin_auth');
+    }
+
     public function __list(Request $request)
     {
-        return $this->getService()->getMany($request);
+        if (env('REDIS_ENABLE', false)) {
+            $result = $this->redis->getCache($this->redis->getKeyCache($request, $this->getAuth(), get_class($this->getService()->getModel())));
+            if ($result) {
+                return json_decode($result);
+            } else {
+                $result = $this->getService()->getMany($request);
+                $this->redis->setCache($request, json_encode($result), $this->getAuth(), get_class($this->getService()->getModel()));
+                return $result;
+            }
+        } else {
+            $result = $this->getService()->getMany($request);
+            return $result;
+        }
     }
 
     public function __find(Request $request)
     {
-        return $this->getService()->getOne($request);
+        if (env('REDIS_ENABLE', false)) {
+            $result = $this->redis->getCache($this->redis->getKeyCache($request, $this->getAuth(), get_class($this->getService()->getModel())));
+            if ($result) {
+                return json_decode($result);
+            } else {
+                $result = $this->getService()->getOne($request);
+                $this->redis->setCache($request, json_encode($result), $this->getAuth(), get_class($this->getService()->getModel()));
+                return $result;
+            }
+        } else {
+            $result = $this->getService()->getOne($request);
+            return $result;
+        }
     }
 
     public function __create()
