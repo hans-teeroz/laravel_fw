@@ -63,7 +63,8 @@ trait ApiTrait
     {
         if (boolval($request->query->get('_noPagination', 0))) {
             return $this->getWithoutPage($request);
-        } else {
+        }
+        else {
             return $this->getWithPage($request);
         }
     }
@@ -98,14 +99,15 @@ trait ApiTrait
                 case 'boolean':
                     if (!$value) {
                         return false;
-                    };
+                    }
+                    ;
                     if ($value == 'true' || $value == '1' || $value == 1) {
                         return true;
                     }
                     if ($value == 'false' || $value == '0' || $value == 0) {
                         return false;
                     }
-                    // no break
+                // no break
                 case 'json':
                 case 'array':
                     return json_encode($value);
@@ -155,7 +157,8 @@ trait ApiTrait
             if ($filter) {
                 if (is_array($filter)) {
                     $query->where([$filter]);
-                } elseif (is_callable($filter)) {
+                }
+                elseif (is_callable($filter)) {
                     call_user_func($filter, $query);
                 }
             }
@@ -177,7 +180,8 @@ trait ApiTrait
         foreach ($relations as $relation) {
             if (array_key_exists($relation, $map) && is_callable($map[$relation])) {
                 call_user_func($map[$relation], $query);
-            } else {
+            }
+            else {
                 if (method_exists($model, $relation)) {
                     $result = call_user_func([$model, $relation]);
                     if ($result instanceof Relation) {
@@ -292,8 +296,8 @@ trait ApiTrait
                 $arr = call_user_func([$this, $name]);
                 if (count($arr) === 3 && $arr[0] instanceof ApiService && in_array($arr[1], ['item', 'items']) && is_callable($arr[2])) {
                     $relationCallbacks[$relation] = [
-                        'fields' => $arr[0]->getFields($request),
-                        'callback' => [$arr[0], $arr[1]],
+                        'fields'        => $arr[0]->getFields($request),
+                        'callback'      => [$arr[0], $arr[1]],
                         'data_callback' => $arr[2],
                     ];
                 }
@@ -304,7 +308,7 @@ trait ApiTrait
         $result = null;
         $meta = [
             'relations' => $this->relations,
-            'fields' => $this->fields(),
+            'fields'    => $this->fields(),
         ];
         if ($data instanceof BaseModel) {
             $result = $this->item($data, $fields);
@@ -312,21 +316,23 @@ trait ApiTrait
                 $relationData = call_user_func($relationCallback['data_callback'], $data);
                 $result[$name] = call_user_func($relationCallback['callback'], $relationData, $relationCallback['fields']);
             }
-        } elseif ($data instanceof LengthAwarePaginator) {
+        }
+        elseif ($data instanceof LengthAwarePaginator) {
             $result = $this->items($data->getCollection(), $fields, $relationCallbacks);
             $meta['pagination'] = [
-                'page' => $data->currentPage(),
-                'perPage' => $data->perPage(),
-                'total' => $data->total(),
+                'page'     => $data->currentPage(),
+                'perPage'  => $data->perPage(),
+                'total'    => $data->total(),
                 'lastPage' => $data->lastPage(),
             ];
-        } elseif ($data instanceof ArrayAccess) {
+        }
+        elseif ($data instanceof ArrayAccess) {
             $result = $this->items($data, $fields, $relationCallbacks);
         }
         return [
             'status' => true,
-            'data' => $result,
-            'meta' => $meta,
+            'data'   => $result,
+            'meta'   => $meta,
         ];
     }
 
@@ -378,9 +384,9 @@ trait ApiTrait
         // ]);
 
         $response = new Response([
-            'status' => false,
+            'status'  => false,
             'message' => $message,
-        ], 200);
+        ], 500);
         throw new ValidationException($message, $response);
     }
 
@@ -407,9 +413,10 @@ trait ApiTrait
             DB::commit();
             return new Result([
                 'status' => $save,
-                'model' => $model,
+                'model'  => $model,
             ]);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             DB::rollback();
             $this->errorResult($e);
         }
@@ -445,9 +452,10 @@ trait ApiTrait
             DB::commit();
             return new Result([
                 'status' => $save,
-                'model' => $model,
+                'model'  => $model,
             ]);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             DB::rollback();
             $this->errorResult($e);
         }
@@ -470,9 +478,10 @@ trait ApiTrait
             DB::commit();
             return new Result([
                 'status' => $save,
-                'model' => $model,
+                'model'  => $model,
             ]);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             DB::rollback();
             $this->errorResult($e);
         }
@@ -506,7 +515,8 @@ trait ApiTrait
             return new Result([
                 'status' => $save,
             ]);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             DB::rollback();
             $this->errorResult($e);
         }

@@ -38,12 +38,14 @@ abstract class ApiController extends BaseController
             $result = $this->redis->getCache($this->redis->getKeyCache($request, $this->getAuth(), get_class($this->getService()->getModel())));
             if ($result) {
                 return json_decode($result);
-            } else {
+            }
+            else {
                 $result = $this->getService()->getMany($request);
                 $this->redis->setCache($request, json_encode($result), $this->getAuth(), get_class($this->getService()->getModel()));
                 return $result;
             }
-        } else {
+        }
+        else {
             $result = $this->getService()->getMany($request);
             return $result;
         }
@@ -55,12 +57,14 @@ abstract class ApiController extends BaseController
             $result = $this->redis->getCache($this->redis->getKeyCache($request, $this->getAuth(), get_class($this->getService()->getModel())));
             if ($result) {
                 return json_decode($result);
-            } else {
+            }
+            else {
                 $result = $this->getService()->getOne($request);
                 $this->redis->setCache($request, json_encode($result), $this->getAuth(), get_class($this->getService()->getModel()));
                 return $result;
             }
-        } else {
+        }
+        else {
             $result = $this->getService()->getOne($request);
             return $result;
         }
@@ -72,15 +76,15 @@ abstract class ApiController extends BaseController
         $result = $this->getService()->create($data);
         if ($result->get('status')) {
             $model = $result->get('model');
-            return [
+            return response()->json([
                 'status' => true,
-                'data' => $model instanceof Model ? $model : null,
-            ];
+                'data'   => $model instanceof Model ? $model : null,
+            ], 201);
         }
-        return [
-            'status' => false,
+        return response()->json([
+            'status'  => false,
             'message' => $result->get('message'),
-        ];
+        ], 400);
     }
 
     public function __update($id)
@@ -89,29 +93,29 @@ abstract class ApiController extends BaseController
         $result = $this->getService()->update($id, $data, null);
         if ($result->get('status')) {
             $model = $result->get('model');
-            return [
+            return response()->json([
                 'status' => true,
-                'data' => $model instanceof Model ? $model : null,
-            ];
+                'data'   => $model instanceof Model ? $model : null,
+            ], 200);
         }
-        return [
-            'status' => false,
+        return response()->json([
+            'status'  => false,
             'message' => $result->get('message'),
-        ];
+        ], 400);
     }
 
     public function __delete($id)
     {
         $result = $this->getService()->delete($id, null);
         if ($result->get('status')) {
-            return [
+            return response()->json([
                 'status' => true,
-            ];
+            ], 200);
         }
-        return [
-            'status' => false,
+        return response()->json([
+            'status'  => false,
             'message' => $result->get('message'),
-        ];
+        ], 400);
     }
 
     abstract protected function getRequest(): Request;
