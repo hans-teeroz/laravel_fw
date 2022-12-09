@@ -2,6 +2,7 @@
 
 use App\Lib\Helper\MapService;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 if (function_exists('c')) {
     throw new Exception('function "c" is already existed !');
@@ -31,5 +32,19 @@ if (!function_exists('convert_time')) {
         } catch (Exception $e) {
             return $e->getMessage();
         }
+    }
+}
+
+if (!function_exists('get_data_user')) {
+    function get_data_user($type, $field = 'id')
+    {
+        return Auth::guard($type)->user() ? Auth::guard($type)->user()->$field : '';
+    }
+}
+
+if (!function_exists('get_auth')) {
+    function get_auth($type)
+    {
+        return Auth::guard($type)->user() ? Auth::guard($type)->user() : null;
     }
 }

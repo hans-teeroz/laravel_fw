@@ -1,2 +1,4 @@
 <?php
-return [];
+return [
+    'successfully_register' => 'Successfully Register'
+];

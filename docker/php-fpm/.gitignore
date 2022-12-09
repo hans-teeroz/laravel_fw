@@ -1,2 +1,3 @@
-.php-fpm.log
+*
+php-fpm.log
 

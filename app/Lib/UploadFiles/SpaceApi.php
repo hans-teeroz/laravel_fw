@@ -66,7 +66,7 @@ class SpaceApi
                         }, $names),
                     ],
                 ]);
-                $deleted = $result->get('Deleted', []);
+                $deleted = $result->get('Deleted');
                 return is_array($deleted) && count($deleted) > 0;
             } catch (Exception $e) {
             }
@@ -154,9 +154,8 @@ class SpaceApi
                 'ContentType' => $file_type,
             ])->get('ObjectURL');
         } catch (Exception $e) {
-            return '';
+            return $e->getMessage();
         }
-        return '';
     }
 
     public function copyObject($sourceBucket, $sourceKeyname, $newKeyname = "", $targetBucket = "")

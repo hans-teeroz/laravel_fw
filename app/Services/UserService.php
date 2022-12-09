@@ -8,9 +8,7 @@ class UserService extends ApiService
 {
     protected $model = User::class;
 
-    protected $relations = [
-
-    ];
+    protected $relations = [];
 
     protected $fieldsName = '_user_fields';
 
@@ -26,7 +24,7 @@ class UserService extends ApiService
 
     protected function fields(): array
     {
-        return ['name',  'email'];
+        return ['name', 'email'];
     }
 
     protected function mapFilters(): array
@@ -38,6 +36,7 @@ class UserService extends ApiService
     {
         parent::boot();
         $this->on('creating', function ($model) {
+            // dd($model);
         });
     }
 }

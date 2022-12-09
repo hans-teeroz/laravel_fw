@@ -47,6 +47,6 @@ class Result
 
     public function __set($key, $value): void
     {
-        $this->get($key, $value);
+        $this->set($key, $value);
     }
 }

@@ -13,8 +13,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
+use RuntimeException;
 
 trait ApiTrait
 {
@@ -276,6 +279,7 @@ trait ApiTrait
             $allow_fields = $this->fields();
             return array_intersect($allow_fields, array_filter(explode(',', $request->query->get($this->fieldsName))));
         }
+        return [];
     }
 
     protected function renderApi($data, Request $request)
@@ -368,13 +372,19 @@ trait ApiTrait
     protected function errorResult($e)
     {
         $message = method_exists($e, 'getMessage') ? $e->getMessage() : "";
-        return new Result([
+        // return new Result([
+        //     'status' => false,
+        //     'message' => $message,
+        // ]);
+
+        $response = new Response([
             'status' => false,
             'message' => $message,
-        ]);
+        ], 200);
+        throw new ValidationException($message, $response);
     }
 
-    public function create($data, $callback = null): Result
+    public function create($data, $callback = null)
     {
         DB::beginTransaction();
         try {
@@ -394,7 +404,6 @@ trait ApiTrait
                     SyncDataJob::dispatch($pathInfo);
                 }
             }
-            
             DB::commit();
             return new Result([
                 'status' => $save,
@@ -402,11 +411,11 @@ trait ApiTrait
             ]);
         } catch (Exception $e) {
             DB::rollback();
-            return $this->errorResult($e);
+            $this->errorResult($e);
         }
     }
 
-    public function update($id, array $data, $callback = null): Result
+    public function update($id, array $data, $callback = null)
     {
         DB::beginTransaction();
         try {
@@ -440,11 +449,11 @@ trait ApiTrait
             ]);
         } catch (Exception $e) {
             DB::rollback();
-            return $this->errorResult($e);
+            $this->errorResult($e);
         }
     }
 
-    public function updateModel(BaseModel $model, array $data, $callback = null): Result
+    public function updateModel(BaseModel $model, array $data, $callback = null)
     {
         DB::beginTransaction();
         try {
@@ -465,11 +474,11 @@ trait ApiTrait
             ]);
         } catch (Exception $e) {
             DB::rollback();
-            return $this->errorResult($e);
+            $this->errorResult($e);
         }
     }
 
-    public function delete($id, $callback = null): Result
+    public function delete($id, $callback = null)
     {
         DB::beginTransaction();
         try {
@@ -492,14 +501,14 @@ trait ApiTrait
                     SyncDataJob::dispatch($pathInfo, get_class($model), $model->getEndcodeAllRelations());
                 }
             }
-            
+
             DB::commit();
             return new Result([
                 'status' => $save,
             ]);
         } catch (Exception $e) {
             DB::rollback();
-            return $this->errorResult($e);
+            $this->errorResult($e);
         }
     }
 }

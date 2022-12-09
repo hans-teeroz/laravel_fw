@@ -114,9 +114,7 @@ abstract class ApiController extends BaseController
         ];
     }
 
-    protected function getRequest()
-    {
-    }
+    abstract protected function getRequest(): Request;
 
     protected function getCreatingData()
     {
