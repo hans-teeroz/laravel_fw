@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\App\AppAuthController;
-use App\Http\Controllers\Crm\CrmHomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\V1\Crm\CrmHomeController;
 use Illuminate\Support\Facades\Route;
 
 /*

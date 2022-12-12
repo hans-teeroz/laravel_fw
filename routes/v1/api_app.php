@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\App\AppAuthController;
-use App\Http\Controllers\App\AppHomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\V1\App\AppAuthController;
+use App\Http\Controllers\V1\App\AppHomeController;
+use App\Http\Controllers\V1\App\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AppHomeController::class, 'index']);
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('/regitster', [AppAuthController::class, '_regitster']);
+    Route::post('/regitster', [AppAppAuthController::class, '_regitster']);
     Route::post('/login', [AppAuthController::class, '__login']);
 
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HelloController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', HelloController::class . '@hello');
+Route::get('/', HomeController::class . '@index');
