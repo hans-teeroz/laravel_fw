@@ -6,6 +6,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Requests\App\RegisterRequest;
 use Illuminate\Http\Request;
 
+/**
+ * @group App - Authentication
+ *
+ * APIs for managing users
+ */
 class AppAuthController extends AuthController
 {
     /**
@@ -40,6 +45,9 @@ class AppAuthController extends AuthController
         return $data;
     }
 
+    /**
+     * Regitster new user
+     **/
     public function _regitster(RegisterRequest $request)
     {
         return parent::__regitster($request);

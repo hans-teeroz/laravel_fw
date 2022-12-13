@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e462de14c0d5b956859417670ea3d46e",
+    "content-hash": "90c46c1b15a5d1ba9364b63e3f01116e",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -9605,6 +9605,56 @@
             "time": "2022-03-03T08:28:38+00:00"
         },
         {
+            "name": "erusev/parsedown",
+            "version": "1.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
+                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
+            },
+            "time": "2019-12-30T22:54:17+00:00"
+        },
+        {
             "name": "facade/flare-client-php",
             "version": "1.10.0",
             "source": {
@@ -10046,42 +10096,69 @@
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
-            "name": "kitloong/laravel-app-logger",
-            "version": "v1.1.0",
+            "name": "knuckleswtf/scribe",
+            "version": "3.37.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kitloong/laravel-app-logger.git",
-                "reference": "9293696a1c0f06b49f475243c8a8f652f06eb085"
+                "url": "https://github.com/knuckleswtf/scribe.git",
+                "reference": "74c483d8f14a57c36fad6a1063cab5437c312c6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kitloong/laravel-app-logger/zipball/9293696a1c0f06b49f475243c8a8f652f06eb085",
-                "reference": "9293696a1c0f06b49f475243c8a8f652f06eb085",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/74c483d8f14a57c36fad6a1063cab5437c312c6b",
+                "reference": "74c483d8f14a57c36fad6a1063cab5437c312c6b",
                 "shasum": ""
             },
             "require": {
+                "erusev/parsedown": "1.7.4",
+                "ext-fileinfo": "*",
                 "ext-json": "*",
-                "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0",
-                "php": ">=7.1.3",
-                "spatie/laravel-http-logger": "^1.0"
+                "ext-pdo": "*",
+                "fakerphp/faker": "^1.9.1",
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/routing": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "league/flysystem": "^1.1.4|^2.1.1|^3.0",
+                "mpociot/reflection-docblock": "^1.0.1",
+                "nikic/php-parser": "^4.10",
+                "nunomaduro/collision": "^3.0|^4.0|^5.0|^6.0",
+                "php": ">=7.4",
+                "ramsey/uuid": "^3.8|^4.0",
+                "shalvah/clara": "^3.1.0",
+                "shalvah/upgrader": "0.*",
+                "spatie/data-transfer-object": "^2.6|^3.0",
+                "symfony/var-exporter": "^4.0|^5.0|^6.0",
+                "symfony/yaml": "^4.0|^5.0|^6.0"
+            },
+            "replace": {
+                "mpociot/laravel-apidoc-generator": "*"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.17|^3.0",
-                "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^3.8|^4.0|^5.0|^6.0|^7.0",
-                "squizlabs/php_codesniffer": "^3.5"
+                "brianium/paratest": "^6.0",
+                "dms/phpunit-arraysubset-asserts": "^0.2.0",
+                "laravel/legacy-factories": "^1.3.0",
+                "laravel/lumen-framework": "^6.0|^7.0|^8.0|^9.0",
+                "league/fractal": "^0.19.0",
+                "nikic/fast-route": "^1.3",
+                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0",
+                "pestphp/pest": "^1.21",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^9.0|^10.0",
+                "symfony/css-selector": "^5.3|^6.0",
+                "symfony/dom-crawler": "^5.3|^6.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "KitLoong\\AppLogger\\AppLoggerServiceProvider"
+                        "Knuckles\\Scribe\\ScribeServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "KitLoong\\AppLogger\\": "src"
+                    "Knuckles\\Camel\\": "camel/",
+                    "Knuckles\\Scribe\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -10090,30 +10167,29 @@
             ],
             "authors": [
                 {
-                    "name": "Kit Loong",
-                    "email": "kitloong1008@gmail.com"
+                    "name": "Shalvah",
+                    "email": "hello@shalvah.me"
                 }
             ],
-            "description": "Laravel log for your application",
-            "homepage": "https://github.com/kitloong/laravel-app-logger",
+            "description": "Generate API documentation for humans from your Laravel codebase.✍",
+            "homepage": "http://github.com/knuckleswtf/scribe",
             "keywords": [
-                "laravel",
-                "log",
-                "performance",
-                "query",
-                "request"
+                "api",
+                "dingo",
+                "documentation",
+                "laravel"
             ],
             "support": {
-                "issues": "https://github.com/kitloong/laravel-app-logger/issues",
-                "source": "https://github.com/kitloong/laravel-app-logger/tree/v1.1.0"
+                "issues": "https://github.com/knuckleswtf/scribe/issues",
+                "source": "https://github.com/knuckleswtf/scribe/tree/3.37.2"
             },
             "funding": [
                 {
-                    "url": "https://www.buymeacoffee.com/kitloong",
-                    "type": "custom"
+                    "url": "https://patreon.com/shalvah",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-02-09T03:34:48+00:00"
+            "time": "2022-09-07T23:13:06+00:00"
         },
         {
             "name": "laravel/sail",
@@ -10312,6 +10388,59 @@
                 "source": "https://github.com/mockery/mockery/tree/1.5.1"
             },
             "time": "2022-09-07T15:32:08+00:00"
+        },
+        {
+            "name": "mpociot/reflection-docblock",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpociot/reflection-docblock.git",
+                "reference": "c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpociot/reflection-docblock/zipball/c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587",
+                "reference": "c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mpociot": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/mpociot/reflection-docblock/issues",
+                "source": "https://github.com/mpociot/reflection-docblock/tree/master"
+            },
+            "time": "2016-06-20T20:53:12+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -11094,78 +11223,6 @@
                 "source": "https://github.com/php-fig/cache/tree/master"
             },
             "time": "2016-08-06T20:24:11+00:00"
-        },
-        {
-            "name": "rakutentech/laravel-request-docs",
-            "version": "1.30",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rakutentech/laravel-request-docs.git",
-                "reference": "ebb3e6f35cf398c480f1d2e112c4f3d2693a12e2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rakutentech/laravel-request-docs/zipball/ebb3e6f35cf398c480f1d2e112c4f3d2693a12e2",
-                "reference": "ebb3e6f35cf398c480f1d2e112c4f3d2693a12e2",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "illuminate/contracts": "^8.37|^9.0",
-                "kitloong/laravel-app-logger": "^1.0",
-                "php": "^7.4|^8.0",
-                "spatie/laravel-package-tools": "^1.4.3"
-            },
-            "require-dev": {
-                "barryvdh/laravel-ide-helper": "^2.12",
-                "brianium/paratest": "^6.2",
-                "friendsofphp/php-cs-fixer": "^3.5",
-                "nunomaduro/collision": "^5.3|^6.0",
-                "orchestra/testbench": "^6.15|^7.0",
-                "phpunit/phpunit": "^9.3",
-                "spatie/laravel-ray": "^1.23",
-                "squizlabs/php_codesniffer": "^3.6",
-                "vimeo/psalm": "^4.8"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Rakutentech\\LaravelRequestDocs\\LaravelRequestDocsServiceProvider"
-                    ],
-                    "aliases": {
-                        "LaravelRequestDocs": "Rakutentech\\LaravelRequestDocs\\LaravelRequestDocsFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Rakutentech\\LaravelRequestDocs\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pulkit Kathuria",
-                    "email": "pulkit.kathuria@rakuten.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Automatically generate Laravel docs from request rules, controllers and routes",
-            "homepage": "https://github.com/rakutentech/laravel-request-docs",
-            "keywords": [
-                "laravel",
-                "laravel-request-docs",
-                "rakutentech"
-            ],
-            "support": {
-                "issues": "https://github.com/rakutentech/laravel-request-docs/issues",
-                "source": "https://github.com/rakutentech/laravel-request-docs/tree/1.30"
-            },
-            "time": "2022-11-15T01:43:12+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -12132,38 +12189,137 @@
             "time": "2020-09-28T06:39:44+00:00"
         },
         {
-            "name": "spatie/laravel-http-logger",
-            "version": "1.10.0",
+            "name": "shalvah/clara",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spatie/laravel-http-logger.git",
-                "reference": "4d1c066528196feb7999687435d70b6efdc733c8"
+                "url": "https://github.com/shalvah/clara.git",
+                "reference": "d3ae9b277393d438edbfcf9ddb7ca42e958fa054"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-http-logger/zipball/4d1c066528196feb7999687435d70b6efdc733c8",
-                "reference": "4d1c066528196feb7999687435d70b6efdc733c8",
+                "url": "https://api.github.com/repos/shalvah/clara/zipball/d3ae9b277393d438edbfcf9ddb7ca42e958fa054",
+                "reference": "d3ae9b277393d438edbfcf9ddb7ca42e958fa054",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0|^9.0",
-                "php": "^7.2|^8.0"
+                "php": ">=7.4",
+                "symfony/console": "^4.0|^5.0|^6.0"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.8.0|^4.0|^5.0|^6.0|^7.0",
-                "phpunit/phpunit": "^8.0|^9.0"
+                "eloquent/phony-phpunit": "^7.0",
+                "phpunit/phpunit": "^9.1"
             },
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\HttpLogger\\HttpLoggerServiceProvider"
-                    ]
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Shalvah\\Clara\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "🔊 Simple, pretty, testable console output for CLI apps.",
+            "keywords": [
+                "cli",
+                "log",
+                "logging"
+            ],
+            "support": {
+                "issues": "https://github.com/shalvah/clara/issues",
+                "source": "https://github.com/shalvah/clara/tree/3.1.0"
+            },
+            "time": "2022-01-14T13:54:30+00:00"
+        },
+        {
+            "name": "shalvah/upgrader",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shalvah/upgrader.git",
+                "reference": "cad9bea6ac6584bf05e58dbc8af43bcb636370e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shalvah/upgrader/zipball/cad9bea6ac6584bf05e58dbc8af43bcb636370e6",
+                "reference": "cad9bea6ac6584bf05e58dbc8af43bcb636370e6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "nikic/php-parser": "^4.13",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "dms/phpunit-arraysubset-asserts": "^0.2.0",
+                "pestphp/pest": "^1.21",
+                "phpstan/phpstan": "^1.0",
+                "spatie/ray": "^1.33"
+            },
+            "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Spatie\\HttpLogger\\": "src"
+                    "Shalvah\\Upgrader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shalvah",
+                    "email": "hello@shalvah.me"
+                }
+            ],
+            "description": "Create automatic upgrades for your package.",
+            "homepage": "http://github.com/shalvah/upgrader",
+            "keywords": [
+                "upgrade"
+            ],
+            "support": {
+                "issues": "https://github.com/shalvah/upgrader/issues",
+                "source": "https://github.com/shalvah/upgrader/tree/0.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://patreon.com/shalvah",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-09-10T02:11:25+00:00"
+        },
+        {
+            "name": "spatie/data-transfer-object",
+            "version": "2.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/data-transfer-object.git",
+                "reference": "167ebbe56ead65ef23abcfae7b75f932afd496a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/data-transfer-object/zipball/167ebbe56ead65ef23abcfae7b75f932afd496a4",
+                "reference": "167ebbe56ead65ef23abcfae7b75f932afd496a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "suggest": {
+                "phpstan/phpstan": "Take advantage of checkUninitializedProperties with \\Spatie\\DataTransferObject\\PHPstan\\PropertiesAreAlwaysInitializedExtension"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DataTransferObject\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -12178,82 +12334,28 @@
                     "role": "Developer"
                 }
             ],
-            "description": "A Laravel package to log HTTP requests",
-            "homepage": "https://github.com/spatie/laravel-http-logger",
+            "description": "Data transfer objects with batteries included",
+            "homepage": "https://github.com/spatie/data-transfer-object",
             "keywords": [
-                "laravel-http-logger",
+                "data-transfer-object",
                 "spatie"
             ],
             "support": {
-                "issues": "https://github.com/spatie/laravel-http-logger/issues",
-                "source": "https://github.com/spatie/laravel-http-logger/tree/1.10.0"
+                "issues": "https://github.com/spatie/data-transfer-object/issues",
+                "source": "https://github.com/spatie/data-transfer-object/tree/2.8.4"
             },
             "funding": [
                 {
                     "url": "https://spatie.be/open-source/support-us",
                     "type": "custom"
-                }
-            ],
-            "time": "2022-06-07T19:48:14+00:00"
-        },
-        {
-            "name": "spatie/laravel-package-tools",
-            "version": "1.12.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "09f80fa240d44fafb1c70657c74ee44ffa929357"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/09f80fa240d44fafb1c70657c74ee44ffa929357",
-                "reference": "09f80fa240d44fafb1c70657c74ee44ffa929357",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^7.0|^8.0|^9.0",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^5.0|^6.23|^7.0",
-                "phpunit/phpunit": "^9.4",
-                "spatie/test-time": "^1.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelPackageTools\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Tools for creating Laravel packages",
-            "homepage": "https://github.com/spatie/laravel-package-tools",
-            "keywords": [
-                "laravel-package-tools",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.12.1"
-            },
-            "funding": [
+                },
                 {
                     "url": "https://github.com/spatie",
                     "type": "github"
                 }
             ],
-            "time": "2022-06-28T14:29:26+00:00"
+            "abandoned": "spatie/laravel-data",
+            "time": "2021-12-07T05:41:11+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -12448,6 +12550,154 @@
                 }
             ],
             "time": "2022-09-28T13:19:49+00:00"
+        },
+        {
+            "name": "symfony/var-exporter",
+            "version": "v5.4.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-exporter.git",
+                "reference": "8fc03ee75eeece3d9be1ef47d26d79bea1afb340"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/8fc03ee75eeece3d9be1ef47d26d79bea1afb340",
+                "reference": "8fc03ee75eeece3d9be1ef47d26d79bea1afb340",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-php80": "^1.16"
+            },
+            "require-dev": {
+                "symfony/var-dumper": "^4.4.9|^5.0.9|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\VarExporter\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Allows exporting any serializable PHP data structure to plain PHP code",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "clone",
+                "construct",
+                "export",
+                "hydrate",
+                "instantiate",
+                "serialize"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/var-exporter/tree/v5.4.10"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-27T12:56:18+00:00"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v5.4.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "ebd37c71f62d5ec5f6e27de3e06fee492d4c6298"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/ebd37c71f62d5ec5f6e27de3e06fee492d4c6298",
+                "reference": "ebd37c71f62d5ec5f6e27de3e06fee492d4c6298",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1|^3",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "symfony/console": "<5.3"
+            },
+            "require-dev": {
+                "symfony/console": "^5.3|^6.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Loads and dumps YAML files",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v5.4.16"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-11-25T16:04:03+00:00"
         },
         {
             "name": "theseer/tokenizer",

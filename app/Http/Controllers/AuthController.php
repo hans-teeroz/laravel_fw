@@ -51,6 +51,10 @@ abstract class AuthController extends Controller
 
     }
 
+    /**
+     * Login
+     *
+     */
     public function __login(Request $request)
     {
         try {
@@ -82,6 +86,11 @@ abstract class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Get me
+     *
+     * @authenticated
+     */
     public function __me()
     {
         try {
@@ -122,7 +131,7 @@ abstract class AuthController extends Controller
     /**
      * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @authenticated
      */
     public function __refresh()
     {
