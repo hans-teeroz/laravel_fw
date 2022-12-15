@@ -17,8 +17,10 @@ class User extends Authentication implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'username', 'active', 'phone', 'address', 'role', 'email_verified_at'
+        'first_name', 'last_name', 'email', 'password', 'username', 'active', 'phone', 'address', 'role', 'email_verified_at',
     ];
+    protected $appends = ['fullname']; //Add Fields with Map or Appends
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -60,4 +62,10 @@ class User extends Authentication implements JWTSubject
     {
         return [];
     }
+
+    public function getFullnameAttribute()
+    {
+        return $this->last_name . ' ' . $this->first_name;
+    }
+
 }

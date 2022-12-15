@@ -14,8 +14,11 @@ class RegisterRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'username' => 'required|email|unique:users,username,' . $this->id,
-            'password' => 'required|min:4',
+            'username'   => 'required|email|unique:users,username,' . $this->id,
+            'password'   => 'required|min:4',
+            'first_name' => 'required',
+            'last_name'  => 'required',
+            'email'      => 'required|email|unique:users,email,' . $this->id,
         ];
     }
 }

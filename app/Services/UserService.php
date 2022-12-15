@@ -24,12 +24,20 @@ class UserService extends ApiService
 
     protected function fields(): array
     {
-        return ['name', 'email'];
+        return ['first_name', 'last_name', 'email', 'password', 'username', 'active', 'phone', 'address', 'role', 'fullname'];
     }
 
     protected function mapFilters(): array
     {
         return [];
+    }
+
+    protected function newQuery()
+    {
+
+        $query = parent::newQuery();
+        // dd($query->get());
+        return $query;
     }
 
     protected function boot()
