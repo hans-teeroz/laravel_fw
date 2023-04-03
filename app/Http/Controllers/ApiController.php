@@ -5,17 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BaseRequest;
 use App\Lib\Cache\Caching;
 use App\Services\ApiService;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Env;
 
 abstract class ApiController extends BaseController
 {
     protected $redis;
 
+    protected $currentFunction;
+
     public function __construct()
     {
-        if (env('REDIS_ENABLE', false)) {
+        if (env('REDIS_CACHE_ENABLE', false)) {
             $this->redis = new Caching();
+            if (request()->method() !== "GET") {
+                $currentFunction = explode('@', $this->getCurrentRoute());
+                $this->currentFunction = array_pop($currentFunction);
+                if (!in_array($this->currentFunction, ['__list', '__find', '__create', '__update', '__delete'])) {
+                    $pathInfo = request()->route()->getPrefix();
+                    //                    SyncDataJob::dispatch($pathInfo, get_class($this->getService()->getModel()), $this->getService()->getModel()->getEndcodeAllRelations());
+                    $this->redis->deleteCache($pathInfo, get_class($this->getService()->getModel()), $this->getService()->getModel()->getEndcodeAllRelations());
+                }
+            }
         }
     }
 
@@ -26,15 +39,12 @@ abstract class ApiController extends BaseController
 
     public function getAuth()
     {
-        if (strpos(\request()->route()->getPrefix(), 'app')) {
-            return c('user_auth');
-        }
-        return c('admin_auth');
+        return get_authed();
     }
 
     public function __list(Request $request)
     {
-        if (env('REDIS_ENABLE', false)) {
+        if (env('REDIS_CACHE_ENABLE', false)) {
             $result = $this->redis->getCache($this->redis->getKeyCache($request, $this->getAuth(), get_class($this->getService()->getModel())));
             if ($result) {
                 return json_decode($result);
@@ -53,7 +63,7 @@ abstract class ApiController extends BaseController
 
     public function __find(Request $request)
     {
-        if (env('REDIS_ENABLE', false)) {
+        if (env('REDIS_CACHE_ENABLE', false)) {
             $result = $this->redis->getCache($this->redis->getKeyCache($request, $this->getAuth(), get_class($this->getService()->getModel())));
             if ($result) {
                 return json_decode($result);

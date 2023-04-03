@@ -32,7 +32,7 @@ services:
       # logging
       - ./docker/nginx/log:/var/log/nginx
       - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
-      # Override xdebug.ini of image 
+      # Override xdebug.ini of image
       # - ./docker/customize/etc/php7/conf.d/xdebug.ini:/etc/php7/conf.d/xdebug.ini
 
   db:
@@ -76,6 +76,6 @@ services:
     labels:
       SERVICE_NAME: laravel8-redis
     ports:
-      - '6389:6379'
+      - '6379:6379'
     volumes:
       - ./docker/redis/data:/data

@@ -15,8 +15,8 @@ class Caching
     public function __construct($host = '127.0.0.1', $port = 6379)
     {
         $this->redis = new Client([
-            'host'   => $host,
-            'port'   => $port,
+            'host' => env('REDIS_HOST') ?? $host,
+            'port' => env('REDIS_PORT') ?? $port,
         ]);
     }
 
@@ -25,7 +25,7 @@ class Caching
         if ($key instanceof Request) {
             $key = $this->getKeyCache($key, $auth, $model_name);
         }
-        $this->redis->set($key, $value);
+        $this->redis->set($key, $value, 'EX', 604800);
     }
 
     public function getCache($key)
@@ -35,29 +35,29 @@ class Caching
 
     public function getKeyCache(Request $request, $auth = null, $model_name = '')
     {
-        $this->requestPathInfo = $request->getPathInfo();
+        $this->requestPathInfo = $request->route()->getPrefix();
         $requestUri = $request->query();
         $requestUriEncode = base64_encode(json_encode($requestUri));
-        $key = $this->requestPathInfo . '#' . $requestUriEncode;
+        $key = $this->requestPathInfo . ':' . $requestUriEncode;
         if ($auth instanceof Base) {
-            $key =   $this->requestPathInfo . '#' . $auth->getKey() . '#' . $requestUriEncode;
+            $key = $this->requestPathInfo . ':' . $auth->getKey() . ':' . $requestUriEncode;
         }
         if ($model_name !== '') {
-            $key = base64_encode($model_name) . '#' . $key;
+            $key = base64_encode($model_name) . ':' . $key;
         }
-        return env('REDIS_DATABASE') . '_' . $key;
+        return env('REDIS_DATABASE') . ':' . $key;
     }
 
     public function deleteCache($pathInfo, $model_name = null, $relation_names = null)
     {
         $count = 0;
         if (isset($model_name) && $model_name !== '') {
-            $pathInfo = env('REDIS_DATABASE') . '_' . base64_encode($model_name) . '#' . $pathInfo;
+            $pathInfo = env('REDIS_DATABASE') . ':' . base64_encode($model_name) . ':' . $pathInfo;
         }
         $keys = $this->redis->keys("$pathInfo*");
         if (is_array($relation_names) && count($relation_names) > 0) {
             foreach ($relation_names as $relation_name) {
-                $keys = array_merge($keys, $this->redis->keys(env('REDIS_DATABASE') . '_' . "$relation_name*"));
+                $keys = array_merge($keys, $this->redis->keys(env('REDIS_DATABASE') . ':' . "$relation_name*"));
             }
         }
         if (count($keys) > 0) {
@@ -81,7 +81,8 @@ class Caching
         $pos = strpos($str_parent, $str_child);
         if ($pos !== false) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

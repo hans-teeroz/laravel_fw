@@ -3,6 +3,7 @@
 namespace App\Lib\SupportTrait;
 
 use App\Jobs\SyncDataJob;
+use App\Lib\Cache\Caching;
 use App\Lib\Helper\Result;
 use App\Models\Base as BaseModel;
 use App\Services\ApiService;
@@ -404,12 +405,8 @@ trait ApiTrait
             $this->emit('created', [$model]);
             $this->emit('saved', [$model]);
 
-            if (env('REDIS_ENABLE', false)) {
-                if ($save) {
-                    $pathInfo = \request()->getPathInfo();
-                    SyncDataJob::dispatch($pathInfo);
-                }
-            }
+            $this->syncDataJob($save, $model);
+
             DB::commit();
             return new Result([
                 'status' => $save,
@@ -442,12 +439,7 @@ trait ApiTrait
             $this->emit('updated', [$model]);
             $this->emit('saved', [$model]);
 
-            if (env('REDIS_ENABLE', false)) {
-                if ($save) {
-                    $pathInfo = str_replace("/$id", '', \request()->getPathInfo());
-                    SyncDataJob::dispatch($pathInfo);
-                }
-            }
+            $this->syncDataJob($save, $model);
 
             DB::commit();
             return new Result([
@@ -504,12 +496,7 @@ trait ApiTrait
             $save = $model->delete();
             $this->emit('deleted', [$model]);
 
-            if (env('REDIS_ENABLE', false)) {
-                if ($save) {
-                    $pathInfo = str_replace("/$id", '', \request()->getPathInfo());
-                    SyncDataJob::dispatch($pathInfo, get_class($model), $model->getEndcodeAllRelations());
-                }
-            }
+            $this->syncDataJob($save, $model);
 
             DB::commit();
             return new Result([
@@ -519,6 +506,18 @@ trait ApiTrait
         catch (Exception $e) {
             DB::rollback();
             $this->errorResult($e);
+        }
+    }
+
+    protected function syncDataJob($save, $model)
+    {
+        if (env('REDIS_CACHE_ENABLE', false)) {
+            if ($save) {
+                $pathInfo = request()->route()->getPrefix();
+                //                SyncDataJob::dispatch($pathInfo, get_class($model), $model->getEndcodeAllRelations());
+                $redis = new Caching();
+                $redis->deleteCache($pathInfo, get_class($model), $model->getEndcodeAllRelations());
+            }
         }
     }
 }

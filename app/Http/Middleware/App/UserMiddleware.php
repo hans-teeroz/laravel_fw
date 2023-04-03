@@ -28,7 +28,8 @@ class UserMiddleware
             $request->setUserResolver(function () {
                 return get_auth('users:api');
             });
-        } catch (JWTException $e) {
+        }
+        catch (JWTException $e) {
             return $this->errorJson($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 

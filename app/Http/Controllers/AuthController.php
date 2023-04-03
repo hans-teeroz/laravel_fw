@@ -61,7 +61,7 @@ abstract class AuthController extends Controller
             $credentials = $request->only('username', 'password');
             if (!$token = Auth::guard($this->typeMiddleware)->attempt($credentials, true)) {
                 return response()->json(
-                    ['status'  => false, 'message' => 'Unauthorized'],
+                    ['status' => false, 'message' => 'Unauthorized'],
                     401
                 );
             }
@@ -82,7 +82,7 @@ abstract class AuthController extends Controller
             'status'       => true,
             'access_token' => $token,
             'token_type'   => 'Bearer',
-            'expires_in'   => auth($this->typeMiddleware)->factory()->getTTL() * 60,
+            'expires_in'   => auth($this->typeMiddleware)->factory()->getTTL() * env('TIME_ACCESS_TOKEN'),
         ]);
     }
 
@@ -101,25 +101,25 @@ abstract class AuthController extends Controller
                 return $this->setCustomClaims();
             }
             return response()->json(
-                ['status'  => false, 'message' => 'User Not Found'],
+                ['status' => false, 'message' => 'User Not Found'],
                 404
             );
         }
         catch (TokenExpiredException $e) {
             return response()->json(
-                ['status'  => false, 'message' => 'Token Expired'],
+                ['status' => false, 'message' => 'Token Expired'],
                 500
             );
         }
         catch (TokenInvalidException $e) {
             return response()->json(
-                ['status'  => false, 'message' => 'Token Invalid'],
+                ['status' => false, 'message' => 'Token Invalid'],
                 500
             );
         }
         catch (JWTException $e) {
             return response()->json(
-                ['status'  => false, 'message' => $e->getMessage()],
+                ['status' => false, 'message' => $e->getMessage()],
                 500
             );
         }
