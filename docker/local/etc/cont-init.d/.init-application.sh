@@ -22,7 +22,8 @@ fi
 
 echo -e "${YELLOW}Re-build config, route, api, cache${NC}"
 # Update config and routes cache
-php artisan config:cache
-php artisan route:cache
-php artisan api:cache
-php artisan cache:clear
+# php artisan config:cache
+# php artisan route:cache
+# php artisan api:cache
+# php artisan cache:clear
+php artisan optimize:clear
