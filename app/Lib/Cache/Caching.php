@@ -20,12 +20,12 @@ class Caching
         ]);
     }
 
-    public function setCache($key, $value, $auth = null, $model_name = '')
+    public function setCache($key, $value, $auth = null, $model_name = '', $time = 604800)
     {
         if ($key instanceof Request) {
             $key = $this->getKeyCache($key, $auth, $model_name);
         }
-        $this->redis->set($key, $value, 'EX', 604800);
+        $this->redis->set($key, $value, 'EX', $time);
     }
 
     public function getCache($key)

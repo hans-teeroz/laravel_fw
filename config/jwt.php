@@ -301,4 +301,9 @@ return [
 
     ],
 
+    'parse_headers' => [
+        //...
+        'X-Refresh-Token' => 'Bearer %s',
+    ],
+
 ];

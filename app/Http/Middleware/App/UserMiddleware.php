@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware\App;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Crypt;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -20,20 +23,21 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        try {
-            $user = JWTAuth::parseToken()->authenticate();
-            if (!$user) {
-                return $this->errorJsonUnauthorized(Response::HTTP_UNAUTHORIZED);
-            }
-            $request->setUserResolver(function () {
-                return get_auth('users:api');
+        $refreshToken = ($request->hasHeader('X-Refresh-Token')) ? $request->header('X-Refresh-Token') : null;
+        if ($refreshToken) {
+            preg_match("/Bearer ([^\ ]*)/i", $refreshToken, $match);
+            $token = $match[1] ?? null;
+            $refreshToken = Crypt::decryptString($token);
+            $user = JWTAuth::setToken($refreshToken)->authenticate();
+
+            App::singleton('old_refresh_token', function () use ($refreshToken) {
+                return $refreshToken;
             });
+            $this->verifyToken($user, $request);
+        } else {
+            $user = JWTAuth::parseToken()->authenticate();
+            $this->verifyToken($user, $request);
         }
-        catch (JWTException $e) {
-            return $this->errorJson($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-
         return $next($request);
     }
 
@@ -52,5 +56,24 @@ class UserMiddleware
             'status'  => false,
             'message' => $message,
         ], $statusCode);
+    }
+
+    private function verifyToken(User $user, Request $request)
+    {
+
+        try {
+            // Dùng để + thêm time cho acess token
+            // JWTAuth::manager()->setRefreshFlow();
+            // JWTAuth::factory()->setTTL(env('JWT_TTL'));
+            if (!$user) {
+                return $this->errorJsonUnauthorized(Response::HTTP_UNAUTHORIZED);
+            }
+            $request->setUserResolver(function () {
+                return get_auth('users:api');
+            });
+        }
+        catch (JWTException $e) {
+            return $this->errorJson($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

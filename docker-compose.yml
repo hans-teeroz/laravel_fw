@@ -27,13 +27,14 @@ services:
     environment:
       APP_ENV: local
       PHP_IDE_CONFIG: serverName=laravel8-web.service.docker
+      XDEBUG_CONFIG: "remote_enable=0"
     volumes:
       - ./:/home/www/app
       # logging
       - ./docker/nginx/log:/var/log/nginx
       - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
       # Override xdebug.ini of image
-      # - ./docker/customize/etc/php7/conf.d/xdebug.ini:/etc/php7/conf.d/xdebug.ini
+      - ./docker/customize/etc/php7/conf.d/xdebug.ini:/etc/php7/conf.d/xdebug.ini
 
   db:
     image: mysql:5.7.35
