@@ -41,7 +41,6 @@ abstract class AuthController extends Controller
                 'username' => $request->username,
                 'password' => $request->password,
                 'email'    => $request->email,
-                //TODO: device_id
             ]);
             return [
                 'status'  => $result->status,
@@ -92,7 +91,6 @@ abstract class AuthController extends Controller
             'status'        => true,
             'access_token'  => $token,
             'token_type'    => 'Bearer',
-            // 'expires_in'    => env('JWT_TTL'),
             'refresh_token' => $refreshToken
         ]);
     }
@@ -156,7 +154,7 @@ abstract class AuthController extends Controller
      *
      * @authenticated
      */
-    public function __refresh(Request $request)
+    public function __refresh()
     {
         //TODO: refresh token current in blacklist + return new access token & new refresh token + update refresh token with redis
         try {
@@ -197,5 +195,20 @@ abstract class AuthController extends Controller
             throw new RuntimeException($e->getMessage());
         }
 
+    }
+
+    public function __logout()
+    {
+        try {
+            $auth = auth($this->typeMiddleware);
+            $auth->logout();
+            return response()->json([
+              'status' => true,
+              'success' => trans('messages.successfully_logout')
+            ]);
+        }
+        catch (RuntimeException $e) {
+            throw new RuntimeException($e->getMessage());
+        }
     }
 }

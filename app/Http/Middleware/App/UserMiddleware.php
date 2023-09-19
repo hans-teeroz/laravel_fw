@@ -35,8 +35,16 @@ class UserMiddleware
             });
             $this->verifyToken($user, $request);
         } else {
-            $user = JWTAuth::parseToken()->authenticate();
-            $this->verifyToken($user, $request);
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                $this->verifyToken($user, $request);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => $th->getMessage()
+                ], Response::HTTP_UNAUTHORIZED);
+            }
+
         }
         return $next($request);
     }

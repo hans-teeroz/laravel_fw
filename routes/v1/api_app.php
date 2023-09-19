@@ -32,6 +32,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'users.api'], function () {
     Route::get('me', [AppAuthController::class, '__me']);
     Route::get('refresh', [AppAuthController::class, '__refresh']);
+    Route::get('logout', [AppAuthController::class, '__logout']);
 });
 
 Route::group(['prefix' => 'user'], function () {
