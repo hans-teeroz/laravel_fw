@@ -152,7 +152,10 @@ abstract class AuthController extends Controller
     /**
      * Refresh a token.
      *
-     * @authenticated
+     * You must use X-Refresh-Token in header with token save on client
+     *
+     * @header X-Refresh-Token Bearer ...
+     *
      */
     public function __refresh()
     {
@@ -197,6 +200,12 @@ abstract class AuthController extends Controller
 
     }
 
+    /**
+     * Logout user
+     *
+     * @authenticated
+     *
+     */
     public function __logout()
     {
         try {

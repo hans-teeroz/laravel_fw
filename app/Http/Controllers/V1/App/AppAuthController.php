@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1\App;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Requests\App\LoginRequest;
 use App\Http\Requests\App\RegisterRequest;
 use Illuminate\Http\Request;
 
@@ -51,5 +52,13 @@ class AppAuthController extends AuthController
     public function _regitster(RegisterRequest $request)
     {
         return parent::__regitster($request);
+    }
+
+    /**
+     * Login user
+     **/
+    public function _login(LoginRequest $request)
+    {
+        return parent::__login($request);
     }
 }

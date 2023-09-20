@@ -24,7 +24,7 @@ Route::get('/', [AppHomeController::class, 'index']);
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/regitster', [AppAuthController::class, '_regitster']);
-    Route::post('/login', [AppAuthController::class, '__login']);
+    Route::post('/login', [AppAuthController::class, '_login']);
 
 
 });
