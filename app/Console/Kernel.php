@@ -2,11 +2,18 @@
 
 namespace App\Console;
 
+use App\Console\Commands\TestSendEmailCommand;
+use App\Console\Commands\WordOfTheDay;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        TestSendEmailCommand::class,
+        WordOfTheDay::class
+    ];
+
     /**
      * Define the application's command schedule.
      *
@@ -15,6 +22,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('test:send-mail')->everyMinute();
+        // $schedule->command('test:word-of-the-day')->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 

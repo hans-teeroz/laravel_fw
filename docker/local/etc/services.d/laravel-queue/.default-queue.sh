@@ -8,4 +8,4 @@
 
 # Action `queue:listen` good for development mode. But it will take performance slow
 # Note: Some Laravel version don't support listen
-php /home/www/app/artisan queue:listen --queue=high,default --sleep=2 --tries=3
+# php /home/www/app/artisan queue:listen --queue=high,default --sleep=2 --tries=3

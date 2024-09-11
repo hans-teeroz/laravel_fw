@@ -27,6 +27,7 @@
         "**/*.php": "./vendor/bin/php-cs-fixer fix --config .php_cs --allow-risky=yes"
     },
     "dependencies": {
-        "yarn": "^1.22.18"
+        "yarn": "^1.22.18",
+        "laravel-echo-server": "1.6.2"
     }
 }
