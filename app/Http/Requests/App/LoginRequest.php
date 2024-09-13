@@ -14,7 +14,7 @@ class LoginRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'username'   => 'required|email|unique:users,username,' . $this->id,
+            'username'   => 'required|email',
             'password'   => 'required|min:4',
             'device_id' => 'required',
         ];
