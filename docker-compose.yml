@@ -35,6 +35,7 @@ services:
       # logging
       - ./docker/nginx/log:/var/log/nginx
       - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
+      - ./storage/logs:/home/www/app/storage/logs
       # Override xdebug.ini of image
       - ./docker/customize/etc/php7/conf.d/xdebug.ini:/etc/php7/conf.d/xdebug.ini
 

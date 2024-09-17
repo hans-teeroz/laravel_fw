@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use App\Lib\Cache\Caching;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -33,7 +34,7 @@ abstract class AuthController extends Controller
     abstract protected function setMiddleware(): string;
     abstract protected function setCustomClaims(): array;
 
-    public function __regitster(Request $request)
+    public function __register(Request $request): JsonResponse
     {
 
         try {
@@ -42,11 +43,13 @@ abstract class AuthController extends Controller
                 'password' => $request->password,
                 'email'    => $request->email,
             ]);
-            return [
-                'status'  => $result->status,
-                'success' => trans('messages.successfully_register'),
-                // 'data'    => $result->model
-            ];
+            return response()->json(
+                [
+                    'status'  => $result->status,
+                    'success' => trans('messages.successfully_register'),
+                    // 'data'    => $result->model
+                ]
+            );
 
         }
         catch (RuntimeException $e) {
@@ -59,7 +62,7 @@ abstract class AuthController extends Controller
      * Login
      *
      */
-    public function __login(Request $request)
+    public function __login(Request $request): JsonResponse
     {
         try {
             $credentials = $request->only('username', 'password');
@@ -84,14 +87,15 @@ abstract class AuthController extends Controller
         }
     }
 
-    protected function createNewToken($refreshToken, $token, $device_id)
+    protected function createNewToken($refreshToken, $token, $device_id): JsonResponse
     {
         $this->createRefreshToken(get_authed()->getKey(), $device_id, $refreshToken);
         return response()->json([
             'status'        => true,
             'access_token'  => $token,
             'token_type'    => 'Bearer',
-            'refresh_token' => $refreshToken
+            'refresh_token' => $refreshToken,
+            'expires_in' => env('JWT_TTL')
         ]);
     }
 
@@ -106,7 +110,7 @@ abstract class AuthController extends Controller
      *
      * @authenticated
      */
-    public function __me()
+    public function __me(): JsonResponse
     {
         try {
 
@@ -157,7 +161,7 @@ abstract class AuthController extends Controller
      * @header X-Refresh-Token Bearer ...
      *
      */
-    public function __refresh()
+    public function __refresh(): JsonResponse
     {
         //TODO: refresh token current in blacklist + return new access token & new refresh token + update refresh token with redis
         try {
@@ -195,7 +199,10 @@ abstract class AuthController extends Controller
             ]);
 
         } catch (RuntimeException $e) {
-            throw new RuntimeException($e->getMessage());
+            return response()->json([
+                'status'        => false,
+            ]);
+//            throw new RuntimeException($e->getMessage());
         }
 
     }
@@ -206,7 +213,7 @@ abstract class AuthController extends Controller
      * @authenticated
      *
      */
-    public function __logout()
+    public function __logout(): JsonResponse
     {
         try {
             $auth = auth($this->typeMiddleware);

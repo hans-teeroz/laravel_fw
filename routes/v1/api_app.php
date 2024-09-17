@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AppHomeController::class, 'index']);
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('/regitster', [AppAuthController::class, '_regitster']);
+    Route::post('/register', [AppAuthController::class, '_register']);
     Route::post('/login', [AppAuthController::class, '_login']);
 
 
