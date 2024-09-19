@@ -24,7 +24,7 @@ abstract class ApiAuthenticate
     public function handle(Request $request, Closure $next)
     {
         $refreshToken = ($request->hasHeader('X-Refresh-Token')) ? $request->header('X-Refresh-Token') : null;
-        if ($refreshToken) {
+        if (isset($refreshToken)) {
             preg_match("/Bearer ([^\ ]*)/i", $refreshToken, $match);
             $token = $match[1] ?? null;
             $refreshToken = Crypt::decryptString($token);
